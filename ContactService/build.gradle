@@ -6,9 +6,9 @@ plugins {
 apply plugin: 'java-library'
 apply plugin: 'io.spring.dependency-management'
 
-jar {
+bootJar {
     baseName = 'ContactService'
-    version =  '0.0.1'
+    version =  'V1'
 	archiveName = 'ContactService.jar'
 }
 

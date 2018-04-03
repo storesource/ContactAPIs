@@ -14,6 +14,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.storesource.contact.model.User;
 
 import lombok.extern.slf4j.Slf4j;
+import software.amazon.ion.NullValueException;
 
 @Slf4j
 public class AWSDynamoRepository{
@@ -78,6 +79,9 @@ public class AWSDynamoRepository{
 	public void updateContact(DynamoContactDTO contactDTO, String contactid) {
 		DynamoContactDTO contactRetrieved = DBmapper.load(DynamoContactDTO.class, contactid);
         log.info("contact retrieved:");
+        if(contactRetrieved == null) {
+        		throw new NullValueException("Contact not present to be updated"); 
+        }
         contactRetrieved = contactDTO;
         DBmapper.save(contactRetrieved);
         log.info("contact updated:");
@@ -99,6 +103,9 @@ public class AWSDynamoRepository{
 	public void deleteContactByID(String contactid, long userID) {
 		
 		DynamoContactDTO contactRetrieved = DBmapper.load(DynamoContactDTO.class, contactid);
+		if(contactRetrieved == null) {
+    		throw new NullValueException("Contact not present to be deleted"); 
+        }
         log.info("contact retrieved");
         DBmapper.delete(contactRetrieved);
         log.info("contact deleted");
