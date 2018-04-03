@@ -28,7 +28,9 @@ import com.storesource.contact.interfaces.IContact;
 import com.storesource.contact.interfaces.IContactService;
 import com.storesource.contact.request.ContactAddonFeature;
 import com.storesource.contact.request.ContactRequest;
+import com.storesource.contact.result.ErrorMessageResponse;
 import com.storesource.contact.result.ResponseFormatter;
+import com.storesource.contact.result.SuccessMessageResponse;
 import com.storesource.contact.utils.Validator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/contactprocessor")
+@RequestMapping(value = "/v1")
 public class ContactController {
 	
 	private static final String USER_CONTEXT = "User-Context";
@@ -64,11 +66,11 @@ public class ContactController {
 			UserContext usercontext = new ObjectMapper().readValue(usercontextsting, UserContext.class);
 			
 			if(!authenticator.isUserAuthenticated(token,usercontext.getUserID())){
-	            return new ResponseEntity<>("User Authentication Failed",HttpStatus.UNAUTHORIZED);
+	            return new ResponseEntity<>(new ErrorMessageResponse("User Authentication Failed"),HttpStatus.UNAUTHORIZED);
 	        }
 			
 			contactservice.createContact(usercontext,type,contactRequestBody);
-			return new ResponseEntity<>("Contact has now been successfully created",HttpStatus.CREATED);
+			return new ResponseEntity<>(new SuccessMessageResponse("Contact has now been successfully created"),HttpStatus.CREATED);
 		
 		}catch (Exception ex) {
 			log.error("Error creating contact: "+ex);
@@ -89,15 +91,20 @@ public class ContactController {
 				UserContext usercontext = new ObjectMapper().readValue(usercontextsting, UserContext.class);
 				
 				if(!authenticator.isUserAuthenticated(token,usercontext.getUserID())){
-		            return new ResponseEntity<>("User Authentication Failed",HttpStatus.UNAUTHORIZED);
+		            return new ResponseEntity<>(new ErrorMessageResponse("User Authentication Failed"),HttpStatus.UNAUTHORIZED);
 		        }
 				
 				if(contactid!=null) {
-					IContact contact = contactservice.getContactByID(contactid, usercontext.getUserID());
-					return new ResponseEntity<>(contact,HttpStatus.OK);
+					try {
+						IContact contact = contactservice.getContactByID(contactid, usercontext.getUserID());
+						return new ResponseEntity<>(contact,HttpStatus.OK);
+					}catch(NullPointerException e) {
+						return new ResponseEntity<>(new ErrorMessageResponse("No Entry for given ContactID"), HttpStatus.NOT_FOUND);
+					}
+					
 				}
 				else {
-					if(name==null && emailAddress==null && pageindex == null) {
+					if(name==null && emailAddress==null) {
 						List<IContact> contacts = contactservice.getAllContactsforUser(usercontext.getUserID());
 						return new ResponseEntity<>(contacts,HttpStatus.OK);
 					}
@@ -107,21 +114,25 @@ public class ContactController {
 						PagedListHolder pages = new PagedListHolder(contactservice.getContactsforName(name,usercontext.getUserID()));
 						pages.setPage(start);
 						pages.setPageSize(size);
-						
+						if(pages.getSource().size()==0) {
+							return new ResponseEntity<>(new ErrorMessageResponse("No Entry for "+name), HttpStatus.NOT_FOUND);
+						}
 						return new ResponseEntity<>(ResponseFormatter.FormattingPaginatedContactResponse(pages),HttpStatus.OK);
 					}
 					if(!(Validator.IsNullorEmpty(emailAddress))  && (start>=0 && size>0)) {
 						PagedListHolder pages = new PagedListHolder(contactservice.getContactsforEmail(emailAddress,usercontext.getUserID()));
 						pages.setPage(start);
 						pages.setPageSize(size);
-						
+						if(pages.getSource().size()==0) {
+							return new ResponseEntity<>(new ErrorMessageResponse("No Entry for "+emailAddress), HttpStatus.NOT_FOUND);
+						}
 						return new ResponseEntity<>(ResponseFormatter.FormattingPaginatedContactResponse(pages),HttpStatus.OK);
 					}
 					
 				}
 				
 				
-				return new ResponseEntity<>("Path Variable or Query Param issue",HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(new ErrorMessageResponse("Path Variable or Query Param issue"),HttpStatus.BAD_REQUEST);
 
 			}catch (Exception ex) {
 				log.error("Error getting contact: "+ex);
@@ -143,15 +154,18 @@ public class ContactController {
 			UserContext usercontext = new ObjectMapper().readValue(usercontextsting, UserContext.class);
 
 			if(!authenticator.isUserAuthenticated(token,usercontext.getUserID())){
-	            return new ResponseEntity<>("User Authentication Failed",HttpStatus.UNAUTHORIZED);
+	            return new ResponseEntity<>(new ErrorMessageResponse("User Authentication Failed"),HttpStatus.UNAUTHORIZED);
 	        }
 			
 			contactservice.updateContactsbyID(contactRequestBody,contactid, usercontext.getUserID());
-			return new ResponseEntity<>("Contact successfully updated",HttpStatus.OK);
+			return new ResponseEntity<>(new SuccessMessageResponse("Contact successfully updated"),HttpStatus.OK);
 		
 		}catch (Exception ex) {
-			log.error("Error getting contact: "+ex);
-			throw new Exception();
+			if(ex.getMessage().contains("Contact not present to be updated")) {
+				return new ResponseEntity<>(new ErrorMessageResponse("Contact not present to be updated"),HttpStatus.NOT_FOUND); 
+			}
+			log.error("Error updating contact: "+ex);
+			throw new PayloadInvalidException(ex.getMessage());
 		}
 	}
 	
@@ -160,7 +174,7 @@ public class ContactController {
 		@RequestMapping(value = "/contacts/{contactid}", produces = "application/json", method = RequestMethod.DELETE)
 		public ResponseEntity<Object> deleteContact(@PathVariable("contactid") String contactid,
 				@RequestHeader(value = ApplicationConstants.AUTHORIZATION) String token,
-				@RequestHeader(value = USER_CONTEXT) String usercontextsting) throws IOException{
+				@RequestHeader(value = USER_CONTEXT) String usercontextsting) throws IOException, PayloadInvalidException{
 
 			log.info("Deleting contact"+ contactid);
 			
@@ -168,17 +182,19 @@ public class ContactController {
 				UserContext usercontext = new ObjectMapper().readValue(usercontextsting, UserContext.class);
 
 				if(!authenticator.isUserAuthenticated(token,usercontext.getUserID())){
-		            return new ResponseEntity<>("User Authentication Failed",HttpStatus.UNAUTHORIZED);
+		            return new ResponseEntity<>(new ErrorMessageResponse("User Authentication Failed"),HttpStatus.UNAUTHORIZED);
 		        }
 				
 				contactservice.deleteContactbyID(contactid, usercontext.getUserID());
-				return new ResponseEntity<>("Contact successfully deleted",HttpStatus.OK);
+				return new ResponseEntity<>(new SuccessMessageResponse("Contact successfully deleted"),HttpStatus.OK);
 			
 			}catch (Exception ex) {
-				log.info("collect check");
-
+				if(ex.getMessage().contains("Contact not present to be deleted")) {
+					return new ResponseEntity<>(new ErrorMessageResponse("Contact not present to be deleted"),HttpStatus.NOT_FOUND); 
+				}
+				log.error("Error updating contact: "+ex);
+				throw new PayloadInvalidException(ex.getMessage());
 			}
-			return null;
 		}	
 
 }

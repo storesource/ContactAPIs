@@ -23,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.storesource.contact.ContactApplication;
 import com.storesource.contact.api.ContactController;
 import com.storesource.contact.interfaces.IContact;

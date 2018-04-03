@@ -128,13 +128,13 @@ public class ApiCalltoMethodMapFailureTest {
 		contactcontroller.createContact(userContextString,null, null, "testtoken", incorrectRequestBody);
 	}
 
-	@Test(expected = PayloadInvalidException.class)
+	@Test(expected = NullPointerException.class)
 	public void MapRequesttoUpdateSingleContact_Fail_NullUserContext() throws Exception {
 
 		contactcontroller.updateContact("123456",null, "testtoken", ContactsGenerator.ValidContactRequestBody());
 	}
 	
-	@Test(expected = PayloadInvalidException.class)
+	@Test(expected = NullPointerException.class)
 	public void MapRequesttoUpdateSingleContact_Fail_IncorrectUserContext_NullUserID() throws Exception {
 		
 
@@ -150,14 +150,14 @@ public class ApiCalltoMethodMapFailureTest {
 		contactcontroller.updateContact("123456",userContextStringwithEmptyUserID, "testtoken", ContactsGenerator.ValidContactRequestBody());
 	}
 	
-	@Test(expected = PayloadInvalidException.class)
+	@Test(expected = NullPointerException.class)
 	public void MapRequesttoUpdateSingleContact_Fail_NullAuthorization() throws Exception {
 		
 		String userContextString = "{\"userID\" :\"123456\",  \"correlationID\" : \"kaksgdkajsgdkas\"}";
 		contactcontroller.updateContact("123456",userContextString, null, ContactsGenerator.ValidContactRequestBody());
 	}
 	
-	@Test(expected = PayloadInvalidException.class)
+	@Test(expected = NullPointerException.class)
 	public void MapRequesttoUpdateSingleContact_Fail_IncorrectAuthorization_Noentry() throws Exception {
 		
 
@@ -166,7 +166,7 @@ public class ApiCalltoMethodMapFailureTest {
 		contactcontroller.updateContact("123456",userContextString,AuthorizationwithNoEntry, ContactsGenerator.ValidContactRequestBody());
 	}
 	
-	@Test(expected = PayloadInvalidException.class)
+	@Test(expected = NullPointerException.class)
 	public void MapRequesttoUpdateSingleContact_Fail_NoBody() throws Exception {
 
 		String userContextString = "{\"userID\" :\"123456\",  \"correlationID\" : \"kaksgdkajsgdkas\"}";
@@ -174,8 +174,8 @@ public class ApiCalltoMethodMapFailureTest {
 		contactcontroller.updateContact("123456",userContextString, "testtoken", null);
 	}
 	
-	@Test(expected = PayloadInvalidException.class)
-	public void MapRequesttouSingleContact_Fail_IncorrectBody() throws Exception {
+	@Test(expected = NullPointerException.class)
+	public void MapRequesttoupdateSingleContact_Fail_IncorrectBody() throws Exception {
 		
 
 		String userContextString = "{\"userID\" :\"123456\",  \"correlationID\" : \"kaksgdkajsgdkas\"}";
