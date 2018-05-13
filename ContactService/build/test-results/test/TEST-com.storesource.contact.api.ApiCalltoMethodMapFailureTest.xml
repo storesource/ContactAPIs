@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2018-04-03T22:02:01" hostname="INMACC02T42UXG8WN" time="0.211">
+  <properties/>
+  <testcase name="MapRequesttoCreateSingleContact_Fail_NullUserContext" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.134"/>
+  <testcase name="MapRequesttoCreateSingleContact_Fail_NoBody" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.048"/>
+  <testcase name="MapRequesttoCreateSingleContact_Fail_NullAuthorization" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.002"/>
+  <testcase name="MapRequesttoGetSingleContact_Fail_IncorrectAuthorization_Noentry" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoUpdateSingleContact_Fail_NullAuthorization" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoGetSingleContact_Fail_IncorrectUserContext_NullUserID" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.002"/>
+  <testcase name="MapRequesttoUpdateSingleContact_Fail_NullUserContext" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.0"/>
+  <testcase name="MapRequesttoupdateSingleContact_Fail_IncorrectBody" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.0"/>
+  <testcase name="MapRequesttoCreateSingleContact_Fail_IncorrectUserContext_EmptyUserID" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.002"/>
+  <testcase name="MapRequesttoUpdateSingleContact_Fail_NoBody" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoCreateSingleContact_Fail_IncorrectAuthorization_Noentry" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoUpdateSingleContact_Fail_IncorrectUserContext_NullUserID" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.0"/>
+  <testcase name="MapRequesttoUpdateSingleContact_Fail_IncorrectAuthorization_Noentry" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoGetSingleContact_Fail_NullUserContext" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.0"/>
+  <testcase name="MapRequesttoGetSingleContact_Fail_IncorrectUserContext_EmptyUserID" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoUpdateSingleContact_Fail_IncorrectUserContext_EmptyUserID" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.002"/>
+  <testcase name="MapRequesttoCreateSingleContact_Fail_IncorrectUserContext_NullUserID" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoCreateSingleContact_Fail_IncorrectBody" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.001"/>
+  <testcase name="MapRequesttoGetSingleContact_Fail_NullAuthorization" classname="com.storesource.contact.api.ApiCalltoMethodMapFailureTest" time="0.0"/>
+  <system-out><![CDATA[03:32:01,356 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+03:32:01,357 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+03:32:01,357 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/prashantsingh/eclipse-workspace/ContactService/build/resources/main/logback.xml]
+03:32:01,409 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+03:32:01,418 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+03:32:01,421 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+03:32:01,427 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+03:32:01,465 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+03:32:01,467 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE-AUDIT]
+03:32:01,485 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1917109566 - No compression will be used
+03:32:01,486 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1917109566 - Will use the pattern ./applogs/archived/contactservice.%d{yyyy-MM-dd}.%i.log for the active file
+03:32:01,489 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@76b9db1f - The date pattern is 'yyyy-MM-dd' from file name pattern './applogs/archived/contactservice.%d{yyyy-MM-dd}.%i.log'.
+03:32:01,489 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@76b9db1f - Roll-over at midnight.
+03:32:01,491 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@76b9db1f - Setting initial period to Sat Mar 31 21:13:24 IST 2018
+03:32:01,491 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@76b9db1f - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+03:32:01,491 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@76b9db1f - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+03:32:01,494 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE-AUDIT] - Active log file name: ./applogs/contactservice.log
+03:32:01,494 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE-AUDIT] - File property is set to [./applogs/contactservice.log]
+03:32:01,495 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [com.storesource.contract] to DEBUG
+03:32:01,495 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE-AUDIT] to Logger[com.storesource.contract]
+03:32:01,495 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [ALERT] to ERROR
+03:32:01,495 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [ALERT] to false
+03:32:01,495 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE-AUDIT] to Logger[ALERT]
+03:32:01,495 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+03:32:01,495 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+03:32:01,495 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+03:32:01,496 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@5c8b76f1 - Registering current configuration as safe fallback point
+
+2018-04-04 03:32:01.507   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Creating Contact for new request: 
+2018-04-04 03:32:01.639  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error creating contact: java.lang.NullPointerException
+2018-04-04 03:32:01.641   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Creating Contact for new request: 
+2018-04-04 03:32:01.688  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error creating contact: java.lang.NullPointerException
+2018-04-04 03:32:01.690   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Creating Contact for new request: 
+2018-04-04 03:32:01.691  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error creating contact: java.lang.NullPointerException
+2018-04-04 03:32:01.692  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error getting contact: java.lang.NullPointerException
+2018-04-04 03:32:01.693   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Update Contact 123456
+2018-04-04 03:32:01.696  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error getting contact: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot construct instance of `com.storesource.contact.context.UserContext` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value ('{"userID" :,  "correlationID" : "kaksgdkajsgdkas"}')
+ at [Source: (String)""{\"userID\" :,  \"correlationID\" : \"kaksgdkajsgdkas\"}""; line: 1, column: 1]
+2018-04-04 03:32:01.697   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Update Contact 123456
+2018-04-04 03:32:01.698   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Update Contact 123456
+2018-04-04 03:32:01.699   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Creating Contact for new request: 
+2018-04-04 03:32:01.701  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error creating contact: com.fasterxml.jackson.databind.JsonMappingException: UserID invalid
+ at [Source: (String)"{"userID" :"",  "correlationID" : "kaksgdkajsgdkas"}"; line: 1, column: 12] (through reference chain: com.storesource.contact.context.UserContext["userID"])
+2018-04-04 03:32:01.702   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Update Contact 123456
+2018-04-04 03:32:01.703   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Creating Contact for new request: 
+2018-04-04 03:32:01.703  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error creating contact: java.lang.NullPointerException
+2018-04-04 03:32:01.704   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Update Contact "{\"userID\" :,  \"correlationID\" : \"kaksgdkajsgdkas\"}"
+2018-04-04 03:32:01.705   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Update Contact 123456
+2018-04-04 03:32:01.707  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error getting contact: java.lang.NullPointerException
+2018-04-04 03:32:01.709  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error getting contact: com.fasterxml.jackson.databind.JsonMappingException: UserID invalid
+ at [Source: (String)"{"userID" :"",  "correlationID" : "kaksgdkajsgdkas"}"; line: 1, column: 12] (through reference chain: com.storesource.contact.context.UserContext["userID"])
+2018-04-04 03:32:01.711   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Update Contact 123456
+2018-04-04 03:32:01.712  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error updating contact: com.fasterxml.jackson.databind.JsonMappingException: UserID invalid
+ at [Source: (String)"{"userID" :"",  "correlationID" : "kaksgdkajsgdkas"}"; line: 1, column: 12] (through reference chain: com.storesource.contact.context.UserContext["userID"])
+2018-04-04 03:32:01.713   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Creating Contact for new request: 
+2018-04-04 03:32:01.714  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error creating contact: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot construct instance of `com.storesource.contact.context.UserContext` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value ('{"userID" :,  "correlationID" : "kaksgdkajsgdkas"}')
+ at [Source: (String)""{\"userID\" :,  \"correlationID\" : \"kaksgdkajsgdkas\"}""; line: 1, column: 1]
+2018-04-04 03:32:01.715   INFO   --- [    Test worker] c.s.contact.api.ContactController        : Creating Contact for new request: 
+2018-04-04 03:32:01.715  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error creating contact: java.lang.NullPointerException
+2018-04-04 03:32:01.716  ERROR   --- [    Test worker] c.s.contact.api.ContactController        : Error getting contact: java.lang.NullPointerException
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,17 @@
+
+server:
+  port: 8087
+
+spring: 
+  application: 
+    name: ContactService
+
+service:
+  retry:
+    maxretryCount: 3
+    retryDelay: 100
+
+logging:
+  level: 
+    com.storesource.contact.ContactApplication: INFO
+    ROOT: DEBUG  
